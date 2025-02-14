@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Message</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
+            max-width: 400px;
+            width: 100%;
+            z-index: 10;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e60000;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-style: italic;
+        }
+        /* Fireworks effect */
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.8) 30%, rgba(255, 0, 0, 0) 70%);
+            border-radius: 50%;
+            animation: explode 1.5s infinite ease-in-out;
+            opacity: 0;
+        }
+        @keyframes explode {
+            0% {
+                transform: scale(0.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Valentine Message</h1>
+        <p>Masukkan nama panggilan Anda:</p>
+        <input type="text" id="nameInput" placeholder="Nama Anda">
+        <button onclick="showMessage()">Tampilkan Pesan</button>
+        <div id="message" class="message"></div>
+    </div>
+    <script>
+        function showMessage() {
+            const name = document.getElementById('nameInput').value;
+            const messageContainer = document.getElementById('message');
+            let message = `........Kamu adalah salah satu kuas dalam kanvas dunia ini. Dunia yang penuh warna dan rasa ini menjadi hidup karena dibumbui oleh berbagai perasaan, komitmen, dan perjuangan. Cinta dan kasih sayang adalah bagian darinya. Cinta bukan sekadar perasaan, bukan hanya keinginan untuk memiliki atau menikmati. Cinta adalah wujud lain dari keindahan yang Tuhan izinkan untuk kita sadari. Terima kasih karena telah mencintai—apa pun dan siapa pun itu.`;
+
+            if (name.trim().toLowerCase() === "hedya") {
+                message += "<br><br>Berbahagia terus si November yang cantik dan manis";
+            }
+            if (name.trim().toLowerCase() === "rolina") {
+                message += "<br><br>Makasih kak Kadonya hehehe....";
+            }
+
+            messageContainer.innerHTML = "";
+            displayMessageOneByOne(`Halo, ${name}${message}`, messageContainer);
+        }
+
+        function displayMessageOneByOne(text, container) {
+            let i = 0;
+            container.innerHTML = ""; // Clear previous content
+            const interval = setInterval(() => {
+                if (i < text.length) {
+                    container.innerHTML += text.charAt(i); // Add one character at a time
+                    i++;
+                } else {
+                    clearInterval(interval); // Stop the interval when the message is complete
+                }
+            }, 50); // Adjust the speed of displaying characters
+        }
+
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+
+            // Random position across the screen
+            firework.style.left = Math.random() * 100 + 'vw';
+            firework.style.top = Math.random() * 100 + 'vh';
+
+            // Random animation duration
+            firework.style.animationDuration = Math.random() * 1 + 1.5 + 's';
+
+            document.body.appendChild(firework);
+
+            // Remove firework after animation
+            setTimeout(() => {
+                firework.remove();
+            }, 1500);
+        }
+
+        // Generate multiple fireworks continuously
+        setInterval(createFirework, 300);
+    </script>
+</body>
+</html>
